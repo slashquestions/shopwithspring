@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <style>
+        table, td, th {
+            border: 1px solid #999;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Список пользователей:</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Enabled</th>
+        <th>User On Site</th>
+    </tr>
+{{#users}}
+    <tr>
+    <td>{{id}}</td>
+    <td>{{username}}</td>
+    <td>{{password}}</td>
+    <td>{{active}}</td>
+    <td>{{userOnSite}}</td>
+    </tr>
+    {{/users}}
+
+</table>
+<form method="post" action="/admin/listusers"></form>
+<h3>Удалить пользователя:</h3>
+<form action="/admin/listusers" method="post">
+    <div><label> :<input type="text" name="id" placeholder="Введите id"> </label></div>
+    <div><input type="submit" value="Delete"></div>
+</form>
+<h3><a href="/admin">На страницу администратора</a></h3>
+</body>
+</html>

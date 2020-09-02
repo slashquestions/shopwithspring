@@ -1,0 +1,12 @@
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config" status="WARN">
+    <Appenders>
+        <Console name="toConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %c{1.}[%t] %level %logger -%msg %n"></PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="toConsole"></AppenderRef>
+        </Root>
+    </Loggers>
+</Configuration>
