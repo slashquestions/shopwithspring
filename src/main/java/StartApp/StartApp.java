@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.User;
 
 
 @SpringBootApplication
+@EntityScan(basePackages = {"StartApp.Entities"})
 
+//@EnableJpaRepositories("StartApp.Repositories")
 public class StartApp {
     public static final Logger logger = LogManager.getLogger();
 

@@ -14,6 +14,11 @@
 <body>
 <b>Номер для заказов: 8-999-999-99-99</b>
 <h1>Магазин бытовой техники для вашего дома!</H1>
+<form method="get" action="/search/">
+    <h3>Поиск товара по id</h3>
+    <div><label><input type="number" name="id" placeholder="Введите ID" required="true"></label></div>
+    <input type="submit" value="Найти">
+</form>
 <br/>
 <h3>Каталог товаров:</h3>
 <a href="/products/refrigerators">Холодильники</a>
@@ -32,6 +37,12 @@
 
 <c:if test="${not empty loginName}">
     <a href="/logout">Выйти с сайта</a>
+</c:if>
+<c:if test="${not empty basketProducts}">
+    <div style="position: absolute;right:100px;top: 100px">
+        <h3><a href="/basketproducts" >Корзина товаров</a></h3>
+
+    </div>
 </c:if>
 </body>
 </html>

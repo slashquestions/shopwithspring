@@ -1,10 +1,9 @@
 package StartApp;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
+import StartApp.Entities.DefaultClassForMachine;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -34,7 +33,7 @@ public class LoginSuccessHandlerActiveTrue implements AuthenticationSuccessHandl
             Statement stmt = driver.createStatement();
             stmt.execute("Update users set user_on_site = true where username="+"'"+username+"';");
             logger.info("User with a name: '"+username+ "', on the site");
-            List<DefaultInterfaceForMachine> basketProducts = new ArrayList<>();
+            List<DefaultClassForMachine> basketProducts = new ArrayList<>();
             request.getSession().setAttribute("basketProducts",basketProducts);
             driver.close();
 

@@ -1,6 +1,6 @@
 package StartApp.Controllers;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
+import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Dishwasher;
 import StartApp.Repositories.DishwashersRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -86,7 +84,7 @@ class DishwashersListPageForUserControllerTest{
 
     @Test
     void toUserPageDishwasher() throws Exception {
-        List<DefaultInterfaceForMachine> list = new ArrayList<>();
+        List<DefaultClassForMachine> list = new ArrayList<>();
         list.add(new Dishwasher());
 
         List<Dishwasher> ref = new ArrayList<>();
@@ -112,7 +110,7 @@ class DishwashersListPageForUserControllerTest{
         refForSearch.setCounter(0);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(dishwashersRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -134,7 +132,7 @@ class DishwashersListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
 
         given(dishwashersRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -157,7 +155,7 @@ class DishwashersListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(dishwashersRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 

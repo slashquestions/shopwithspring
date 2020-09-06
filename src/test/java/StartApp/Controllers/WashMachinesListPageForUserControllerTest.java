@@ -1,6 +1,6 @@
 package StartApp.Controllers;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
+import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Refrigerator;
 import StartApp.Entities.WashMachine;
 import StartApp.Repositories.WashMachinesRepo;
@@ -10,11 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -88,7 +84,7 @@ class WashMachinesListPageForUserControllerTest {
 
     @Test
     void toUserPageWashMachines() throws Exception {
-        List<DefaultInterfaceForMachine> list = new ArrayList<>();
+        List<DefaultClassForMachine> list = new ArrayList<>();
         list.add(new Refrigerator());
 
         List<Refrigerator> ref = new ArrayList<>();
@@ -114,7 +110,7 @@ class WashMachinesListPageForUserControllerTest {
         refForSearch.setCounter(0);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(washMachinesRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -136,7 +132,7 @@ class WashMachinesListPageForUserControllerTest {
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
 
         given(washMachinesRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -159,7 +155,7 @@ class WashMachinesListPageForUserControllerTest {
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(washMachinesRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 

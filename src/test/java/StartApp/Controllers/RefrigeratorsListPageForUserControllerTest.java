@@ -1,6 +1,6 @@
 package StartApp.Controllers;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
+import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Refrigerator;
 import StartApp.Repositories.RefrigeratorsRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -87,7 +84,7 @@ class RefrigeratorsListPageForUserControllerTest{
 
     @Test
     void testToUserPageRefrigerators() throws Exception {
-        List<DefaultInterfaceForMachine> list = new ArrayList<>();
+        List<DefaultClassForMachine> list = new ArrayList<>();
         list.add(new Refrigerator());
 
         List<Refrigerator> ref = new ArrayList<>();
@@ -113,7 +110,7 @@ class RefrigeratorsListPageForUserControllerTest{
         refForSearch.setCounter(0);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(refrigeratorsRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -135,7 +132,7 @@ class RefrigeratorsListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
 
         given(refrigeratorsRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
@@ -158,7 +155,7 @@ class RefrigeratorsListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultInterfaceForMachine> listProducts = new ArrayList<>();
+        List<DefaultClassForMachine> listProducts = new ArrayList<>();
         listProducts.add(refForSearch);
         given(refrigeratorsRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 

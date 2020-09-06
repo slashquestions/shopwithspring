@@ -1,7 +1,6 @@
 package StartApp.Controllers;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
-import StartApp.Entities.Dishwasher;
+import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Refrigerator;
 import StartApp.Repositories.RefrigeratorsRepo;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +27,7 @@ public class RefrigeratorsListPageForUserController {
     @GetMapping
     public String toUserPageRefrigerators(HttpServletRequest request, Model model, Authentication authentication){
         logger.info("User with name '"+authentication.getName()+"' entered on" + request.getRequestURI());
-        List<DefaultInterfaceForMachine> basketProducts  = (List<DefaultInterfaceForMachine>) request.getSession().getAttribute("basketProducts");
+        List<DefaultClassForMachine> basketProducts  = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
         System.err.println(basketProducts);
         Iterable<Refrigerator> listRefrigerators = refrigeratorsRepo.findAll();
         model.addAttribute("refrigerators",listRefrigerators);
@@ -46,8 +45,8 @@ public class RefrigeratorsListPageForUserController {
             if(oldCounterProductFromDB>0){
                 request.getSession().setAttribute("messageAboutProduct",null);
 
-                List<DefaultInterfaceForMachine> basketProducts = (List<DefaultInterfaceForMachine>) request.getSession().getAttribute("basketProducts");
-                for(DefaultInterfaceForMachine product: basketProducts){
+                List<DefaultClassForMachine> basketProducts = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
+                for(DefaultClassForMachine product: basketProducts){
                     if(product.getId() == id){
                         int oldCounter = product.getCounter();
                         oldCounter++;

@@ -1,6 +1,6 @@
 package StartApp.Controllers;
 
-import StartApp.Entities.DefaultInterfaceForMachine;
+import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Dishwasher;
 import StartApp.Repositories.DishwashersRepo;
 import org.apache.logging.log4j.LogManager;
@@ -21,17 +21,17 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/products/dishwashers")
-
 public class DishwashersListPageForUserController {
 
     private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private DishwashersRepo dishwasherRepo;
+
     @GetMapping
     public String toUserPageDishwasher(HttpServletRequest request, Model model, Authentication authentication){
         logger.info("User with name '"+ authentication.getName()+"' entered on" + request.getRequestURI());
-        List<DefaultInterfaceForMachine> basketProducts  = (List<DefaultInterfaceForMachine>) request.getSession().getAttribute("basketProducts");
+        List<DefaultClassForMachine> basketProducts  = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
         System.err.println(basketProducts);
         Iterable<Dishwasher> listDishwashers =  dishwasherRepo.findAll();
         model.addAttribute("dishwashers",listDishwashers);
@@ -47,8 +47,8 @@ public class DishwashersListPageForUserController {
             if(oldCounterProductFromDB>0){
                 request.getSession().setAttribute("messageAboutProduct",null);
 
-                List<DefaultInterfaceForMachine> basketProducts = (List<DefaultInterfaceForMachine>) request.getSession().getAttribute("basketProducts");
-                for(DefaultInterfaceForMachine product: basketProducts){
+                List<DefaultClassForMachine> basketProducts = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
+                for(DefaultClassForMachine product: basketProducts){
                     if(product.getId() == id){
                         int oldCounter = product.getCounter();
                         oldCounter++;
