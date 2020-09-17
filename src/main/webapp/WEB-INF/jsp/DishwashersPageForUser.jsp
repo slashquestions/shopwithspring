@@ -22,11 +22,11 @@
     <div style="position: absolute;right:100px;top: 20px">
     <h3><a href="/basketproducts" >Ваша корзина:</a></h3>
 <c:forEach items="${basketProducts}" var="basket">
-    <b>${basket.id}</b>
-    <b>${basket.type}</b>
-    <b>${basket.maker}</b>
+    <b>${basket.product.id}</b>
+    <b>${basket.product.type}</b>
+    <b>${basket.product.maker}</b>
     <b>${basket.counter}</b>
-    <b>${basket.price}</b>
+    <b>${basket.product.price}</b>
     <br/>
 </c:forEach>
     </div>

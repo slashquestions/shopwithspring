@@ -1,6 +1,7 @@
 package StartApp.Controllers;
 
 import StartApp.Entities.DefaultClassForMachine;
+import StartApp.Entities.OrderItem;
 import StartApp.Entities.Refrigerator;
 import StartApp.Entities.WashMachine;
 import StartApp.Repositories.WashMachinesRepo;
@@ -155,8 +156,10 @@ class WashMachinesListPageForUserControllerTest {
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultClassForMachine> listProducts = new ArrayList<>();
-        listProducts.add(refForSearch);
+        List<OrderItem> listProducts = new ArrayList<>();
+        OrderItem one = new OrderItem(1,refForSearch);
+
+        listProducts.add(one);
         given(washMachinesRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
 

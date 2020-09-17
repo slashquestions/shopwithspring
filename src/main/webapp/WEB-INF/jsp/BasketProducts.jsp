@@ -32,18 +32,23 @@
 
         <c:forEach items="${basketProducts}" var="basket">
     <tr>
-            <th>${basket.id}</th>
-            <th>${basket.type}</th>
-            <th>${basket.maker}</th>
+            <th>${basket.product.id}</th>
+            <th>${basket.product.type}</th>
+            <th>${basket.product.maker}</th>
             <th>${basket.counter}</th>
-            <th>${basket.price}</th>
+            <th>${basket.product.price}</th>
 
     </tr>
         </c:forEach>
 
 </c:if>
+
+    <h3>Цена:${overPrice}</h3>
 </table>
-    <h3><a href="/">На главную страницу</a></h3>
+
+<h3><a href="/makeorder">Оформить заказ</a></h3>
+
+<h3><a href="/">На главную страницу</a></h3>
 
 </body>
 </html>

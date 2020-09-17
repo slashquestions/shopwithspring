@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Products")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorValue("BD_TYPE")
 public class DefaultClassForMachine {
 
     @Id

@@ -2,6 +2,7 @@ package StartApp.Controllers;
 
 import StartApp.Entities.DefaultClassForMachine;
 import StartApp.Entities.Dishwasher;
+import StartApp.Entities.OrderItem;
 import StartApp.Repositories.DishwashersRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -155,8 +156,10 @@ class DishwashersListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultClassForMachine> listProducts = new ArrayList<>();
-        listProducts.add(refForSearch);
+        List<OrderItem> listProducts = new ArrayList<>();
+        OrderItem one = new OrderItem(1,refForSearch);
+
+        listProducts.add(one);
         given(dishwashersRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
 

@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Refrigerators")
-@DiscriminatorValue("refrigerators")
 public class Refrigerator extends  DefaultClassForMachine {
 
 

@@ -1,7 +1,9 @@
 package StartApp.Controllers;
 
 import StartApp.Entities.DefaultClassForMachine;
+import StartApp.Entities.OrderItem;
 import StartApp.Entities.WashMachine;
+import StartApp.Repositories.OrderRepo;
 import StartApp.Repositories.WashMachinesRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,11 +28,14 @@ public class WashMachinesListPageForUserController {
     private static final Logger logger = LogManager.getLogger();
 
     @Autowired
+    private OrderRepo orderRepo;
+
+    @Autowired
     private WashMachinesRepo washMachinesRepo;
     @GetMapping
     public String toUserPageWashMachines(HttpServletRequest request, Model model, Authentication authentication){
         logger.info("User with name '"+authentication.getName()+"' entered on" + request.getRequestURI());
-        List<DefaultClassForMachine> basketProducts  = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
+        List<OrderItem> basketProducts  = (List<OrderItem>) request.getSession().getAttribute("basketProducts");
         System.err.println(basketProducts);
         Iterable<WashMachine> listWashmachines =  washMachinesRepo.findAll();
         model.addAttribute("washmachines",listWashmachines);
@@ -46,10 +51,9 @@ public class WashMachinesListPageForUserController {
             int oldCounterProductFromDB = findWashMach.getCounter();
             if(oldCounterProductFromDB>0){
                 request.getSession().setAttribute("messageAboutProduct",null);
-
-                List<DefaultClassForMachine> basketProducts = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
-                for(DefaultClassForMachine product: basketProducts){
-                    if(product.getId() == id){
+                List<OrderItem> basketProducts = (List<OrderItem>) request.getSession().getAttribute("basketProducts");
+                for(OrderItem product: basketProducts){
+                    if(product.getProduct().getId() == id){
                         int oldCounter = product.getCounter();
                         oldCounter++;
                         product.setCounter(oldCounter);
@@ -60,8 +64,7 @@ public class WashMachinesListPageForUserController {
                     }
                 }
                 WashMachine newWashMachineForSession = new WashMachine().createClone(findWashMach);
-                newWashMachineForSession.setCounter(1);
-                basketProducts.add(newWashMachineForSession);
+                basketProducts.add(new OrderItem(1,newWashMachineForSession));
                 request.getSession().setAttribute("basketProducts",basketProducts);
                 findWashMach.setCounter(--oldCounterProductFromDB);
                 washMachinesRepo.save(findWashMach);

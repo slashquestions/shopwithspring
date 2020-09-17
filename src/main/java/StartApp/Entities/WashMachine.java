@@ -6,7 +6,6 @@ import javax.persistence.*;
 
     @Entity
     @Table(name = "Washmachines")
-    @DiscriminatorValue("washmachines")
     public class WashMachine extends DefaultClassForMachine {
 
         public WashMachine createClone(WashMachine washMachine){

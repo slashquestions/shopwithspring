@@ -1,7 +1,9 @@
 package StartApp.Controllers;
 
 import StartApp.Entities.DefaultClassForMachine;
+import StartApp.Entities.OrderItem;
 import StartApp.Entities.Refrigerator;
+import StartApp.Repositories.OrderRepo;
 import StartApp.Repositories.RefrigeratorsRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,11 +25,14 @@ public class RefrigeratorsListPageForUserController {
     private static final Logger logger = LogManager.getLogger();
 
     @Autowired
+    private OrderRepo orderRepo;
+
+    @Autowired
     private RefrigeratorsRepo refrigeratorsRepo;
     @GetMapping
     public String toUserPageRefrigerators(HttpServletRequest request, Model model, Authentication authentication){
         logger.info("User with name '"+authentication.getName()+"' entered on" + request.getRequestURI());
-        List<DefaultClassForMachine> basketProducts  = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
+        List<OrderItem> basketProducts  = (List<OrderItem>) request.getSession().getAttribute("basketProducts");
         System.err.println(basketProducts);
         Iterable<Refrigerator> listRefrigerators = refrigeratorsRepo.findAll();
         model.addAttribute("refrigerators",listRefrigerators);
@@ -44,10 +49,9 @@ public class RefrigeratorsListPageForUserController {
             int oldCounterProductFromDB = findRefr.getCounter();
             if(oldCounterProductFromDB>0){
                 request.getSession().setAttribute("messageAboutProduct",null);
-
-                List<DefaultClassForMachine> basketProducts = (List<DefaultClassForMachine>) request.getSession().getAttribute("basketProducts");
-                for(DefaultClassForMachine product: basketProducts){
-                    if(product.getId() == id){
+                List<OrderItem> basketProducts = (List<OrderItem>) request.getSession().getAttribute("basketProducts");
+                for(OrderItem product: basketProducts){
+                    if(product.getProduct().getId() == id){
                         int oldCounter = product.getCounter();
                         oldCounter++;
                         product.setCounter(oldCounter);
@@ -58,8 +62,7 @@ public class RefrigeratorsListPageForUserController {
                     }
                 }
                 Refrigerator newRefrigeratorForSession = new Refrigerator().createClone(findRefr);
-                newRefrigeratorForSession.setCounter(1);
-                basketProducts.add(newRefrigeratorForSession);
+                basketProducts.add(new OrderItem(1,newRefrigeratorForSession));
                 request.getSession().setAttribute("basketProducts",basketProducts);
                 findRefr.setCounter(--oldCounterProductFromDB);
                 refrigeratorsRepo.save(findRefr);
@@ -79,28 +82,5 @@ public class RefrigeratorsListPageForUserController {
 
     }
 
-    //КОД ВНИЗУ РАБОТАЕТ НО НЕ ОЧЕНЬ ВЕРНО (ТОЛЬКО ДЛЯ ХОЛОДИЛЬНИКОВ)
-//    @PostMapping
-//    public String addRefrigerator(HttpServletRequest request,@RequestParam String id,Model model) {
-//        Optional<Refrigerator> findedRefrigerator = refrigeratorsRepo.findById(Integer.valueOf(id));
-//        System.err.println(findedRefrigerator.isPresent());
-//        if (findedRefrigerator.isPresent()) {
-//            Refrigerator ourRefrigerator = findedRefrigerator.get();
-//            List<Refrigerator> list = (List<Refrigerator>) request.getSession().getAttribute("basketproducts");
-//            if (list == null) {
-//                list = new ArrayList<>();
-//                list.add(ourRefrigerator);
-//                request.getSession().setAttribute("basketproducts", list);
-//            } else {
-//                list.add(ourRefrigerator);
-//                request.getSession().setAttribute("basketproducts", list);
-//            }
-//            return "redirect:/products/refrigerators";
-//
-//        }else{
-//            return "redirect:/products/refrigerators";
-//        }
-//
-//
-//    }
+
     }

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.support.Repositories;
 import org.springframework.security.core.userdetails.User;
 
-
+import java.util.Arrays;
 
 
 @SpringBootApplication
@@ -25,5 +25,10 @@ public class StartApp {
     public static void main(String[] args) {
         logger.warn("Start App");
         SpringApplication.run(StartApp.class,args);
+
+
+
+
+
     }
 }

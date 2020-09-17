@@ -1,6 +1,7 @@
 package StartApp.Controllers;
 
 import StartApp.Entities.DefaultClassForMachine;
+import StartApp.Entities.OrderItem;
 import StartApp.Entities.Refrigerator;
 import StartApp.Repositories.RefrigeratorsRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -110,8 +111,10 @@ class RefrigeratorsListPageForUserControllerTest{
         refForSearch.setCounter(0);
         refForSearch.setPrice(10000);
 
-        List<DefaultClassForMachine> listProducts = new ArrayList<>();
-        listProducts.add(refForSearch);
+        List<OrderItem> listProducts = new ArrayList<>();
+        OrderItem one = new OrderItem(1,refForSearch);
+
+        listProducts.add(one);
         given(refrigeratorsRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
 
@@ -155,8 +158,11 @@ class RefrigeratorsListPageForUserControllerTest{
         refForSearch.setCounter(10);
         refForSearch.setPrice(10000);
 
-        List<DefaultClassForMachine> listProducts = new ArrayList<>();
-        listProducts.add(refForSearch);
+
+        List<OrderItem> listProducts = new ArrayList<>();
+        OrderItem one = new OrderItem(1,refForSearch);
+
+        listProducts.add(one);
         given(refrigeratorsRepo.findById(anyInt())).willReturn(Optional.of(refForSearch));
 
 

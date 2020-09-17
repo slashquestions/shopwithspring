@@ -2,6 +2,7 @@ package StartApp.Entities;
 
 
 import StartApp.Enums.Role;
+import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +17,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
+    @Column(name = "username")
     private String username;
+    @NotNull
+    @Column(name = "password")
     private String password;
+    @NotNull
+    @Column(name = "active")
     private boolean active;
+    @NotNull
+    @Column(name = "user_on_site")
     private boolean userOnSite;
 
 
